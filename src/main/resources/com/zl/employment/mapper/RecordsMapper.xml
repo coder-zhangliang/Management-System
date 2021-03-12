@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.employment.mapper.RecordsMapper">
+
+  <!-- 查询招聘的条数 -->
+  <select id="pageRecords" resultType="integer">
+    select count(*)
+    from recruitment_content
+  </select>
+
+  <!-- 查询页面的招聘信息 -->
+  <select id="pageData" resultType="RecruitmentContent">
+    select *
+    from recruitment_content
+  </select>
+
+  <!-- 获取文章的内容 -->
+  <select id="getRecruitmentDetail" resultType="RecruitmentContent">
+    select *
+    from recruitment_content
+    where username = #{username} and date = #{dateTime}
+  </select>
+
+  <!-- 获取指定用户发布的所有的招聘信息 -->
+  <select id="recruitmentList" resultType="RecruitmentContent">
+    select company, headline, date
+    from recruitment_content
+    where username = #{username}
+  </select>
+
+  <!-- 获取简历列表 -->
+  <select id="receiveRecruitment" resultType="RecruitmentContent">
+    select username, date
+    from recruitment_content
+    where username = #{username}
+  </select>
+
+</mapper>

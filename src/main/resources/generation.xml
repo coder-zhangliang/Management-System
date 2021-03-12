@@ -1,0 +1,58 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--
+            context：生成上下文，配置生成规则
+                 id：随意写
+      targetRuntime：生成策略
+                     1. MyBatis3DynamicSql 默认，生成带动态SQL的CRUD
+                     2. MyBatis3 生成通用的查询，可以指定动态where条件
+                     3. MyBatis3Simple 只生成简单的CRUD
+    -->
+    <context id="simple" targetRuntime="MyBatis3Simple">
+
+        <commentGenerator>
+            <!-- 设置是否生成注释，true为不生成，若不生成则下次生成的代码将不进行合并 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据源 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC"
+                        userId="root"
+                        password="123456"/>
+
+        <!--
+            POJO
+            javaModelGenerator：Java实体生成规则（POJO）
+            targetPackage：生成到相对路径下的包
+            targetProject：相对路径
+         -->
+        <javaModelGenerator targetPackage="com.zl.employment.pojo" targetProject="src/main/java"/>
+        <!--
+            mapper映射文件
+            sqlMapGenerator：xml映射文件生成规则
+        -->
+        <sqlMapGenerator targetPackage="com.zl.employment.pojo" targetProject="src/main/resources"/>
+        <!--
+            mapper接口
+            javaClientGenerator：mapper接口生成规则
+            type：生成方式
+                  1. 使用接口绑定的方式生成，需要配置javaClientGenerator
+                  2. 使用注解的方式生成
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zl.employment.mapper" targetProject="src/main/java"/>
+
+        <!--
+            设置需要生成的表
+            tableName：需要生成的表名
+            domainObjectName：表名对应生成POJO的名字，默认是表名首字母大写
+            mapperName：生成的接口名和xml名
+         -->
+        <table tableName="user_enterprise" domainObjectName="UserEnterprise" mapperName="UserEnterpriseMapper"/>
+        <table tableName="user_ordinary" domainObjectName="UserOrdinary" mapperName="UserOrdinaryMapper"/>
+
+    </context>
+</generatorConfiguration>

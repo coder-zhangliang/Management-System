@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zl.employment.mapper.UserOrdinaryMapper">
+  <resultMap id="BaseResultMap" type="com.zl.employment.pojo.UserOrdinary">
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="password" jdbcType="CHAR" property="password" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zl.employment.pojo.UserOrdinary">
+    insert into user_ordinary (name, password)
+    values (#{name,jdbcType=CHAR}, #{password,jdbcType=CHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select name, password
+    from user_ordinary
+  </select>
+
+  <select id="queryUsername" resultType="_int">
+    select count(name)
+    from user_ordinary
+    where name = #{username}
+  </select>
+</mapper>
